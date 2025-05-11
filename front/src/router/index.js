@@ -5,6 +5,7 @@ import EditarFormulario from '../views/EditarFormulario.vue'
 import Estadisticas from '../views/Estadisticas.vue'
 import Usuarios from '../views/Usuarios.vue'
 import Inventos from '../views/Inventos.vue'
+import Alternativas from '../views/EditarAlternativas.vue'
 
 const routes = [
   {
@@ -34,6 +35,12 @@ const routes = [
     path: '/usuarios',
     name: 'Usuarios',
     component: Usuarios,
+    meta: { requiresAuth: true }
+  },
+   {
+    path: '/alternativas',
+    name: 'Alternativas',
+    component: Alternativas,
     meta: { requiresAuth: true }
   },
   {

@@ -5,6 +5,7 @@
     <router-link to="/estadisticas">Estadísticas</router-link>
     <router-link to="/usuarios">Usuarios</router-link>
     <router-link to="/inventos">Inventos</router-link>
+    <router-link to="/alternativas">Alternativas</router-link>
     <button @click="handleLogout">Cerrar Sesión</button>
   </nav>
 </template>
