@@ -1,7 +1,7 @@
 <template>
   <nav>
     <router-link to="/">Inicio</router-link>
-    <router-link to="/editar-formulario">Editar Formulario</router-link>
+    <router-link to="/editar-formulario">Preguntas</router-link>
     <router-link to="/estadisticas">Estadísticas</router-link>
     <router-link to="/usuarios">Usuarios</router-link>
     <router-link to="/inventos">Inventos</router-link>

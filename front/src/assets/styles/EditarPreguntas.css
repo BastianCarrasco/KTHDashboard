@@ -1,0 +1,171 @@
+
+.formulario-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.titulo-principal {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+.nueva-pregunta-btn {
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+.formulario-edicion {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #495057;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+textarea.form-control {
+  min-height: 100px;
+}
+
+.botones-accion {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0069d9;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.btn-edit {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.btn-delete {
+  background-color: #dc3545;
+  color: white;
+}
+
+.lista-preguntas {
+  margin-top: 30px;
+}
+
+.tabla-container {
+  overflow-x: auto;
+}
+
+.tabla-preguntas {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.tabla-preguntas th, .tabla-preguntas td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.tabla-preguntas th {
+  background-color: #343a40;
+  color: white;
+  font-weight: 500;
+}
+
+.tabla-preguntas tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.tabla-preguntas tr:hover {
+  background-color: #e9ecef;
+}
+
+.acciones {
+  display: flex;
+  gap: 5px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.error-message {
+  color: #dc3545;
+  background-color: #f8d7da;
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border: 1px solid #f5c6cb;
+}
+
+.success-message {
+  color: #155724;
+  background-color: #d4edda;
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border: 1px solid #c3e6cb;
+}
+
+/* Añade esto si estás usando Font Awesome */
+.fas {
+  font-size: 14px;
+}
