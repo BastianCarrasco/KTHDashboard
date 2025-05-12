@@ -24,39 +24,27 @@
     <!-- Mensaje de error -->
     <div v-if="error" class="error-message">{{ error }}</div>
     
-    <!-- Gráfico histórico (solo cuando se filtra por usuario) -->
-    <div v-if="selectedUserId && filteredHistorial.length > 0" class="chart-container">
-      <h2>Evolución Histórica</h2>
-      <div class="chart">
-        <div 
-          v-for="(result, index) in userHistoryChart" 
-          :key="index"
-          class="chart-bar"
-          :style="{ height: `${result.value * 10}%`, backgroundColor: result.color }"
-          :title="`${result.category}: ${result.value} (${result.date})`"
-        >
-          <span class="chart-value">{{ result.value }}</span>
-        </div>
-      </div>
-      <div class="chart-labels">
-        <div v-for="(result, index) in userHistoryChart" :key="index" class="chart-label">
-          {{ result.dateShort }}
-        </div>
-      </div>
-      <div class="chart-legend">
-        <div v-for="category in chartCategories" :key="category.key">
-          <span class="legend-color" :style="{ backgroundColor: getCategoryColor(category.key) }"></span>
-          {{ category.label }}
-        </div>
-      </div>
-    </div>
+
+<div
+  v-if="selectedUserId && filteredHistorial.length > 0"
+  class="charts-wrapper"
+>
+  <div
+    v-for="(evaluation, index) in filteredHistorial"
+    :key="evaluation.id"
+    class="chart-card"
+  >
+    <h3>{{ formatFechaCorta(evaluation.fecha) }}</h3>
+    <RadarChart :evaluations="[evaluation]" :size="200" />
+  </div>
+</div>
     
     <!-- Tabla de resultados -->
     <div v-if="filteredHistorial.length > 0" class="table-container">
       <table class="data-table">
         <thead>
           <tr>
-            <th>ID</th>
+           
             <th>Usuario</th>
             <th>Email</th>
             <th>Fecha Evaluación</th>
@@ -70,7 +58,7 @@
         </thead>
         <tbody>
           <tr v-for="item in filteredHistorial" :key="item.id">
-            <td>{{ item.id }}</td>
+           
             <td>{{ item.nombre }}</td>
             <td>{{ item.email }}</td>
             <td>{{ formatFecha(item.fecha) }}</td>
@@ -94,6 +82,8 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import apifuncions from '@/api/apifuncions';
+import '../assets/styles/Estadisticas.css';
+import RadarChart from '@/components/RadarChart.vue';
 
 // Datos reactivos
 const historial = ref([]);
@@ -217,153 +207,29 @@ onMounted(async () => {
     loading.value = false;
   }
 });
+const formatFechaCorta = (fecha) => {
+  const date = new Date(fecha);
+  return date.toLocaleDateString('es-CL');
+};
+
 </script>
 
 <style scoped>
-.loading {
-  padding: 1rem;
-  text-align: center;
-  color: #666;
-}
-
-.error-message {
-  padding: 1rem;
-  color: #d32f2f;
-  background-color: #fde0e0;
-  border-radius: 4px;
-  margin: 1rem 0;
-}
-
-.no-data {
-  padding: 1rem;
-  text-align: center;
-  color: #666;
-}
-
-.filters {
+.charts-wrapper {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  align-items: center;
-}
-
-.search-input {
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  flex-grow: 1;
-  max-width: 300px;
-}
-
-.user-select {
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background-color: white;
-}
-
-.table-container {
-  overflow-x: auto;
-  margin-top: 1.5rem;
-}
-
-.data-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.9rem;
-}
-
-.data-table th, .data-table td {
-  padding: 0.75rem;
-  text-align: center;
-  border: 1px solid #e0e0e0;
-}
-
-.data-table th {
-  background-color: #f5f5f5;
-  font-weight: 600;
-}
-
-.data-table tr:hover {
-  background-color: #f9f9f9;
-}
-
-/* Estilos para puntajes */
-.high-score {
-  color: #2e7d32;
-  background-color: #e8f5e9;
-}
-
-.medium-score {
-  color: #f57c00;
-  background-color: #fff3e0;
-}
-
-.low-score {
-  color: #c62828;
-  background-color: #ffebee;
-}
-
-/* Estilos para el gráfico */
-.chart-container {
-  margin: 2rem 0;
-  padding: 1rem;
-  border: 1px solid #eee;
-  border-radius: 8px;
-  background-color: #fafafa;
-}
-
-.chart {
-  display: flex;
-  height: 300px;
-  align-items: flex-end;
-  gap: 2px;
-  margin-bottom: 1rem;
-  position: relative;
-}
-
-.chart-bar {
-  flex: 1;
-  min-width: 20px;
-  position: relative;
-  transition: height 0.3s ease;
-  border-radius: 4px 4px 0 0;
-  display: flex;
-  justify-content: center;
-}
-
-.chart-value {
-  position: absolute;
-  top: -25px;
-  font-size: 0.8rem;
-  font-weight: bold;
-}
-
-.chart-labels {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.8rem;
-  color: #666;
-}
-
-.chart-label {
-  flex: 1;
-  text-align: center;
-}
-
-.chart-legend {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
   flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 20px;
+  justify-content: center;
 }
 
-.legend-color {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  margin-right: 5px;
-  border-radius: 3px;
+.chart-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  background: #f9f9f9;
+  width: 220px;
+  text-align: center;
 }
+
 </style>
